@@ -26,10 +26,14 @@ router.updatePageLinks();
 }
 
 axios.get("http://jsonplaceholder.typicode.com/posts")
-.then((response) => {
+.then(response => {
   response.data.forEach(post => {
   state.Blog.posts.push(post);
 });
+const params = router.lastRouteResolved().params;
+if (params){
+render(state[params.page]);
+  }
 });
 
 // import {
