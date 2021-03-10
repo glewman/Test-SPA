@@ -1,6 +1,4 @@
-import html from "html-literal";
-
 export default {
-  header: "Home",
+  header: "Home Page",
   page: "Home",
 };

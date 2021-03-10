@@ -1,15 +1,15 @@
+import html from "html-literal";
 import links from '../store/Links';
 
-export default (st) => `
+export default (st) => html `
   <nav>
     <i class="fas fa-bars"></i>
     <ul class="hidden--mobile nav-links">
-    ${
-      links
+    ${st
       .map(
         (link) => `<li><a href="/${link.title}" data-navigo>${link.text}</a></li>`
       )
-      .join()}
+      .join("")}
     </ul>
   </nav>
   `;

@@ -1,25 +1,21 @@
 import { Header, Nav, Main, Footer } from "./components";
 import * as state from "./store";
 
-// import {
-//   AddPicturesToGallery,
-//   GalleryPictures,
-//   PrintFormOnSubmit
-// } from "./lib";
 import Navigo from "navigo";
 import { capitalize } from "lodash";
 
-const router = new Navigo(window.location.origin);
+const router = new Navigo("/");
 
 router.on({
   "/": () => render(state.Home),
-  ":page": params => {
-    let page = capitalize(params.page);
+  ":page":(params) => {
+    let page = capitalize(params.data.page);
     render(state[page]);
-  },})
+  },
+  })
   .resolve();
 
-function render(st) {
+function render(st = state.Home) {
   document.querySelector("#root").innerHTML = `
   ${Header(st)}
   ${Nav(state.Links)}
@@ -29,9 +25,15 @@ function render(st) {
 router.updatePageLinks();
 }
 
+// import {
+//   AddPicturesToGallery,
+//   GalleryPictures,
+//   PrintFormOnSubmit
+// } from "./lib";
+// render();
 // render(state.Home);
 
-// add menu toggle to bars icon in nav bar
+
 document
   .querySelector(".fa-bars")
   .addEventListener("click", () =>
@@ -44,5 +46,5 @@ document
 // AddPicturesToGallery(GalleryPictures, gallerySection);
 
 // handle form submission with PrintFormOnSubmit module
-const form = document.querySelector("form");
-PrintFormOnSubmit(form);
+// const form = document.querySelector("form");
+// PrintFormOnSubmit(form);
