@@ -1,8 +1,9 @@
-import { Header, Nav, Main, Footer } from "./components";
 import * as state from "./store";
-import axios from "axios";
+import { Header, Nav, Main, Footer } from "./components";
 import Navigo from "navigo";
 import { capitalize } from "lodash";
+import axios from "axios";
+import "./.env";
 
 const router = new Navigo("/");
 
@@ -11,7 +12,7 @@ router.on({
   ":page":(params) => {
     let page = capitalize(params.data.page);
     render(state[page]);
-  },
+  }
   })
   .resolve();
 
@@ -24,16 +25,24 @@ function render(st = state.Home) {
 `;
 router.updatePageLinks();
 }
+// render(state.Home);
 
-axios.get("http://jsonplaceholder.typicode.com/posts")
+axios.get(`http://jsonplaceholder.typicode.com/posts`)
 .then(response => {
   response.data.forEach(post => {
   state.Blog.posts.push(post);
 });
 const params = router.lastRouteResolved().params;
-if (params){
+if (params) {
 render(state[params.page]);
   }
+});
+
+axios.get(`http://api.openweathermap.org/data/2.5/weather?q=st.%20louis&appid=${process.env.OPEN_WEATHER_API}`).then(response => {
+  state.Home.weather.city = response.name;
+  state.Home.weather.temp = response.main.temp;
+  state.Home.weather.description = response.weather.main;
+
 });
 
 // import {
