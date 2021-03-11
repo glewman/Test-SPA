@@ -3,7 +3,7 @@ import { Header, Nav, Main, Footer } from "./components";
 import Navigo from "navigo";
 import { capitalize } from "lodash";
 import axios from "axios";
-import "./.env";
+import "./env";
 
 const router = new Navigo("/");
 
