@@ -10,5 +10,5 @@ router
   .post((request, response) => {
     response.json(request.body);
   });
-// don't forget to export the router Object
+// Router Object
 module.exports = router;

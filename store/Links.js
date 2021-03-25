@@ -4,6 +4,8 @@ export default [
   { title: "Gallery", text: "Gallery" },
   { title: "Form", text: "Submit A Form" },
   { title: "Blog", text: "Blog" },
+  { title: "Pizza", text: "Pizza!" },
+  { title: "Order", text: "Order Pizza!" }
 ];
 
 
